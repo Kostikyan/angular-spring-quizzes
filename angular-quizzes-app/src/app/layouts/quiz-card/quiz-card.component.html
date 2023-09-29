@@ -1,0 +1,26 @@
+<body style="background: var(--secondary-color); height: auto">
+<div class="py-5">
+  <div class="container">
+    <div class="row hidden-md-up">
+
+      <div class="col-md-4 mb-2" *ngFor="let quiz of quizzes;">
+        <div class="card p-3">
+          <div class="card-block">
+            <img src="assets/quiz.png" alt="quiz png" width="40px">
+            <h4 class="card-title pt-1">{{quiz.title}}</h4>
+            <h6
+              class="card-subtitle text-muted pt-1">{{quiz.createdDateTime.toString().slice(0, 10).replaceAll(',', '/')}}</h6>
+            <button class="btn btn-primary btn-success mt-3" (click)="singleQuiz(Number(quiz.id))">Take the quiz</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div style="position: static; margin-top: 24vh;">ㅤ</div>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+<script src="https://pingendo.com/assets/bootstrap/bootstrap-4.0.0-alpha.6.min.js"></script>
+</body>

@@ -1,0 +1,24 @@
+.site-logo {
+  padding: 5px 20px;
+  border-radius: 20px;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  font-family: 'Skranji', cursive;
+}
+
+.site-logo-div{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+}
+
+.header-nav-li-a {
+  padding: 10px;
+  text-decoration: none;
+  color: var(--primary-color);
+}
+.header-nav-li-a:hover {
+  transition: 2s;
+  cursor: pointer;
+  color: var(--secondary-color);
+}

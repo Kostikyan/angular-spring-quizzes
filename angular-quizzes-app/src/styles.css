@@ -1,0 +1,47 @@
+/* You can add global styles to this file, and also import other style files */
+@import "bootstrap/dist/css/bootstrap.min.css";
+
+:root {
+  --primary-color: #026467;
+  --secondary-color: #E5F5EA;
+  --body-text-color: #596392;
+  --navbar-footer-color: #F9F9F9;
+}
+
+.center {
+  text-align: center;
+}
+
+.toast-success {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  height: 90px;
+  min-width: 250px;
+  background-color: lawngreen;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+}
+
+.toast-error {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  height: 90px;
+  min-width: 250px;
+  background-color: orangered;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+}

@@ -1,0 +1,51 @@
+<div class="login">
+
+  <div class="login-form text-center">
+    <h3 class="login-form-name" style="font-family: 'Raleway', sans-serif;">Login Form</h3>
+
+    <form #loginForm=ngForm class="mt-4" (ngSubmit)="onSubmitLogin(loginForm)">
+        <div class="form-group">
+          <label style="font-family: 'Raleway', sans-serif;">Email</label>
+          <input
+            type="email"
+            name="username"
+            placeholder="Email"
+            class="form-control"
+            [(ngModel)]="username"
+            #Email='ngModel'
+            required
+            pattern = '^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$'
+            [ngClass]="{'is-invalid': Email.touched && Email.invalid}"
+          />
+
+
+          <div class="alert alert-danger" *ngIf="Email.touched && Email.invalid">
+            <div *ngIf="Email.errors?.['required']">Username field is required</div>
+            <div *ngIf="Email.errors?.['pattern']">Wrong username format (ex: support@mail.ru)</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label style="font-family: 'Raleway', sans-serif;">Password</label>
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            class="form-control"
+            [(ngModel)]="password"
+            #Password='ngModel'
+            required
+            [ngClass]="{'is-invalid': Password.touched && Password.invalid}"
+          >
+
+          <div class="alert alert-danger" *ngIf="Password.touched && Password.invalid">
+            <div *ngIf="Password.errors?.['required']">Password field is required</div>
+          </div>
+        </div>
+
+        <div class="form-group mt-4" style="width: 100%;">
+          <button type="submit" [disabled]="loginForm.invalid" class="btn btn-success" style="width: 80px">Login</button>
+        </div>
+    </form>
+  </div>
+</div>

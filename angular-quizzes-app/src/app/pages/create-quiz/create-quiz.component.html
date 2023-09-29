@@ -1,0 +1,174 @@
+<section class="create-quiz">
+  <div class="container">
+
+    <form action="" #createQuiz="ngForm" id="create-quiz" class="create-quiz-form active-c">
+      <h3 style="color: var(--primary-color); font-family: 'Roboto', sans-serif;">Create Quiz</h3>
+
+      <div class="form-group mt-4">
+        <label>Title</label>
+        <input
+          type="text"
+          name="title"
+          #quiztitle='ngModel'
+          required
+          [(ngModel)]="quizTitle"
+          class="form-control"
+          [ngClass]="{'is-invalid': quiztitle.touched && quiztitle.invalid}"
+        >
+
+        <div class="alert alert-danger" *ngIf="quiztitle.touched && quiztitle.invalid">
+          Title field is required
+        </div>
+      </div>
+
+      <div class="form-group mt-4" style="width: 100%;">
+        <button class="btn btn-success" style="width: 90px" (click)="continueCreating(createQuiz)"
+                [disabled]="quiztitle.invalid">Continue
+        </button>
+      </div>
+    </form>
+
+    <form action="" #addQuestionForm="ngForm" id="add-question" class="create-quiz-form hidden-c">
+      <h3 style="color: var(--primary-color); font-family: 'Roboto', sans-serif;">Add Questions</h3>
+
+      <div class="form-group mt-4">
+        <label>Title</label>
+        <input
+          type="text"
+          name="title"
+          class="form-control"
+          [(ngModel)]="questionTitle"
+          required
+          #questiontitle='ngModel'
+          [ngClass]="{'is-invalid': questiontitle.touched && questiontitle.invalid}"
+        >
+
+        <div class="alert alert-danger" *ngIf="questiontitle.touched && questiontitle.invalid">
+          Title field is required
+        </div>
+      </div>
+
+      <div class="form-group mt-4">
+        <label>Question Type</label>
+        <select class="custom-select" name="questionType" [(ngModel)]="questionType">
+          <option value="SINGLE_SELECT">Single select</option>
+          <option value="MULTI_SELECT">Multi select</option>
+        </select>
+      </div>
+
+      <div class="form-group mt-4">
+        <label>Score</label>
+        <input
+          type="number"
+          name="score"
+          class="form-control"
+          [(ngModel)]="score"
+          required
+          #qScore='ngModel'
+          [ngClass]="{'is-invalid': qScore.touched && qScore.invalid}"
+        >
+
+        <div class="alert alert-danger" *ngIf="qScore.touched && qScore.invalid">
+          Score field is required
+        </div>
+      </div>
+
+      <div class="form-group mt-4" *ngIf="questionType =='SINGLE_SELECT' || questionType == 'MULTI_SELECT'">
+        <label>Answers Count</label>
+
+        <select class="custom-select" name="answersCount" [(ngModel)]="answersCount">
+          <option *ngIf="questionType =='SINGLE_SELECT'" value='2'>2</option>
+          <option value='3'>3</option>
+          <option value='4'>4</option>
+        </select>
+      </div>
+
+      <div *ngIf="Number(answersCount) >= 2" class="form-group mt-4">
+        <label>Options</label>
+        <br>
+        <button class="btn-danger btn-primary" (click)="deleteCorrectAnswerId()">Reset correct answer</button>
+        <br>
+        <ng-container *ngIf="Number(answersCount) == 2">
+          <div style=" display: inline-flex;">
+            <input required [ngStyle]="{'background-color':correctAnswerId == '1' || correctAnswersId.includes('1') ? 'lime' : ''}" type="text"
+                   name="answer_1" style="width: 800px;" class="form-control" [(ngModel)]="answer_1">
+            <button class="btn-success btn-primary" *ngIf="questionType=='SINGLE_SELECT'" (click)="setCorrectAnswerId('1')">✓</button>
+            <button class="btn-success btn-primary" *ngIf="questionType=='MULTI_SELECT'" (click)="addCorrectAnswersId('1')">✓</button>
+          </div>
+
+          <div style=" display: inline-flex;">
+            <input required [ngStyle]="{'background-color':correctAnswerId == '2' || correctAnswersId.includes('2') ? 'lime' : ''}" type="text"
+                   name="answer_2" style="width: 800px;" class="form-control" [(ngModel)]="answer_2">
+            <button class="btn-success btn-primary" (click)="setCorrectAnswerId('2')" *ngIf="questionType=='SINGLE_SELECT'">✓</button>
+            <button class="btn-success btn-primary" *ngIf="questionType=='MULTI_SELECT'" (click)="addCorrectAnswersId('2')">✓</button>
+
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="Number(answersCount) == 3">
+          <div style=" display: inline-flex;">
+            <input required [ngStyle]="{'background-color':correctAnswerId == '1' || correctAnswersId.includes('1') ? 'lime' : ''}" type="text"
+                   name="answer_3" style="width: 800px;" class="form-control" [(ngModel)]="answer_3">
+            <button class="btn-success btn-primary" *ngIf="questionType=='SINGLE_SELECT'" (click)="setCorrectAnswerId('1')">✓</button>
+            <button class="btn-success btn-primary" *ngIf="questionType=='MULTI_SELECT'" (click)="addCorrectAnswersId('1')">✓</button>
+
+          </div>
+          <div style=" display: inline-flex;">
+            <input required [ngStyle]="{'background-color':correctAnswerId == '2' || correctAnswersId.includes('2') ? 'lime' : ''}" type="text"
+                   name="answer_4" style="width: 800px;" class="form-control" [(ngModel)]="answer_4">
+            <button class="btn-success btn-primary" *ngIf="questionType=='SINGLE_SELECT'" (click)="setCorrectAnswerId('2')">✓</button>
+            <button class="btn-success btn-primary" *ngIf="questionType=='MULTI_SELECT'" (click)="addCorrectAnswersId('2')">✓</button>
+          </div>
+          <div style=" display: inline-flex;">
+            <input required [ngStyle]="{'background-color':correctAnswerId == '3' || correctAnswersId.includes('3')  ? 'lime' : ''}" type="text"
+                   name="answer_5" style="width: 800px;" class="form-control" [(ngModel)]="answer_5">
+            <button class="btn-success btn-primary" *ngIf="questionType=='SINGLE_SELECT'" (click)="setCorrectAnswerId('3')">✓</button>
+            <button class="btn-success btn-primary" *ngIf="questionType=='MULTI_SELECT'" (click)="addCorrectAnswersId('3')">✓</button>
+
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="Number(answersCount) == 4">
+          <div style=" display: inline-flex;">
+            <input required [ngStyle]="{'background-color':correctAnswerId == '1' || correctAnswersId.includes('1')  ? 'lime' : ''}" type="text"
+                   name="answer_6" style="width: 800px;" class="form-control" [(ngModel)]="answer_6">
+            <button class="btn-success btn-primary" *ngIf="questionType=='SINGLE_SELECT'" (click)="setCorrectAnswerId('1')">✓</button>
+            <button class="btn-success btn-primary" *ngIf="questionType=='MULTI_SELECT'" (click)="addCorrectAnswersId('1')">✓</button>
+
+          </div>
+          <div style=" display: inline-flex;">
+            <input required [ngStyle]="{'background-color':correctAnswerId == '2' || correctAnswersId.includes('2')  ? 'lime' : ''}" type="text"
+                   name="answer_7" style="width: 800px;" class="form-control" [(ngModel)]="answer_7">
+            <button class="btn-success btn-primary" *ngIf="questionType=='SINGLE_SELECT'" (click)="setCorrectAnswerId('2')">✓</button>
+            <button class="btn-success btn-primary" *ngIf="questionType=='MULTI_SELECT'" (click)="addCorrectAnswersId('2')">✓</button>
+          </div>
+          <div style=" display: inline-flex;">
+            <input required [ngStyle]="{'background-color':correctAnswerId == '3' || correctAnswersId.includes('3')  ? 'lime' : ''}" type="text"
+                   name="answer_8" style="width: 800px;" class="form-control" [(ngModel)]="answer_8">
+            <button class="btn-success btn-primary" *ngIf="questionType=='SINGLE_SELECT'" (click)="setCorrectAnswerId('3')">✓</button>
+            <button class="btn-success btn-primary" *ngIf="questionType=='MULTI_SELECT'" (click)="addCorrectAnswersId('3')">✓</button>
+
+          </div>
+          <div style=" display: inline-flex;">
+            <input required [ngStyle]="{'background-color':correctAnswerId == '4' || correctAnswersId.includes('4')  ? 'lime' : ''}" type="text"
+                   name="answer_9" style="width: 800px;" class="form-control" [(ngModel)]="answer_9">
+            <button class="btn-success btn-primary" *ngIf="questionType=='SINGLE_SELECT'" (click)="setCorrectAnswerId('4')">✓</button>
+            <button class="btn-success btn-primary" *ngIf="questionType=='MULTI_SELECT'" (click)="addCorrectAnswersId('4')">✓</button>
+
+          </div>
+        </ng-container>
+
+      </div>
+
+      <div class="form-group mt-4" style="width: 100%;">
+        <button type="button" [disabled]="addQuestionForm.invalid || correctAnswerId=='' && correctAnswersId.length == 0" class="btn btn-info"
+                style="width: 130px" (click)="addQuestion(addQuestionForm)">Add Question
+        </button>
+        <button type="submit" class="btn btn-success" style="width: 80px; margin-left: 10px" (click)="sendToSpring()">
+          Create
+        </button>
+      </div>
+    </form>
+  </div>
+
+</section>

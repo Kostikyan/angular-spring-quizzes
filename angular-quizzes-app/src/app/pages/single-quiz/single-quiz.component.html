@@ -1,0 +1,41 @@
+<h1 class="text-info ml-3">{{quizTitle}}</h1>
+
+<hr>
+<br>
+
+<div style="background-color: var(--secondary-color); padding-bottom: 100px; padding-top: 20px">
+
+  <form #questionsForm=ngForm>
+    <div class="card ml-3 mb-3" *ngFor="let question of questions; let x = index" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">Question {{x + 1}}. {{question.title}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">score: {{question.score}}</h6>
+
+        <ng-container *ngFor="let option of getAllOptionsOfQuestion(question); let y = index">
+          <input [value]="option.title" class="form-check-inline" type="radio" name="radio_answer_{{question.id}}"
+                 *ngIf="String(question.questionType) == 'SINGLE_SELECT'" (change)="onChangeRadio(option, question.id)">
+          <input [value]="option.title" class="form-check-inline" type="checkbox" name="checkbox_answer_{{question.id}}"
+                 *ngIf="String(question.questionType) == 'MULTI_SELECT'"
+                 (change)="onChangeCheckbox(option, question.id)">
+
+          <span class="card-text">{{y + 1}} ) {{option.title}}</span>
+          <br>
+        </ng-container>
+
+        <br>
+        <button [id]="question.id" class="btn btn-primary btn-success" (click)="addAnswer(question);">Confirm
+        </button>
+
+      </div>
+    </div>
+
+    <div *ngIf="end" >
+      <div class="position-absolute result-div">
+        <p style="color: var(--secondary-color)">{{answersScores}} / {{scores}}</p>
+      </div>
+    </div>
+  </form>
+
+
+
+</div>

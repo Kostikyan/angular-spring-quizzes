@@ -1,0 +1,54 @@
+.home_page .img{
+  z-index: -1;
+  position: absolute;
+  top: 72px;
+  width: 100%;
+  height: 91.2vh;
+  background-color: var(--secondary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.site_name{
+  font-size: 100px;
+  letter-spacing: 20px;
+  border-radius: 20px;
+  color: var(--primary-color);
+  font-family: 'Skranji', cursive;
+  cursor: default;
+}
+
+.home_page p {
+  color: var(--primary-color);
+  cursor: default;
+}
+
+.home_page_decor_1{
+  font-size: 200px;
+  position: absolute;
+  top: 200px;
+  left: 400px;
+  transform: rotate(45deg);
+
+}
+.home_page_decor_2{
+  font-size: 200px;
+  position: absolute;
+  bottom: 170px;
+  right: 400px;
+  transform: rotate(45deg);
+}
+
+.home_page_decor_1_{
+  font-size: 40px;
+  position: absolute;
+  top: 100px;
+}
+
+.home_page_decor_2_{
+  font-size: 40px;
+  position: absolute;
+  bottom: 60px;
+  right: 0;
+}
+

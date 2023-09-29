@@ -1,0 +1,14 @@
+.result-div {
+  background: var(--primary-color);
+  top: 440px;
+  right: 523px;
+  border-radius: 10px;
+  width: 300px;
+  height: 100px;
+  font-size: 40px;
+  font-family: 'Skranji', cursive;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

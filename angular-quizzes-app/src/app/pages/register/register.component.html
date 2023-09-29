@@ -1,0 +1,96 @@
+<div class="register">
+
+  <div class="register-form text-center">
+    <h3 class="register-form-name" style="font-family: 'Raleway', sans-serif;">Register Form</h3>
+
+    <form #register="ngForm" (ngSubmit)="onSubmitRegister(register)" class="mt-4">
+      <div class="form-group">
+        <label style="font-family: 'Raleway', sans-serif;">Name</label>
+        <input
+          type="text"
+          name="name"
+          placeholder="Name"
+          class="form-control"
+          [(ngModel)]="name"
+          #Name='ngModel'
+          required
+          pattern = '([^0-9]*)'
+        >
+        <div class="alert alert-danger" *ngIf="Name.touched && Name.invalid">
+          <div *ngIf="Name.errors?.['required']">Name field is required</div>
+          <div *ngIf="Name.errors?.['pattern']">Name cannot contain number</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label style="font-family: 'Raleway', sans-serif;">Surname</label>
+        <input
+          type="text"
+          name="surname"
+          placeholder="Surname"
+          class="form-control"
+          [(ngModel)]="surname"
+          #Surname='ngModel'
+          required
+          pattern = '([^0-9]*)'
+        >
+
+        <div class="alert alert-danger" *ngIf="Surname.touched && Surname.invalid">
+          <div *ngIf="Surname.errors?.['required']">Surname field is required</div>
+          <div *ngIf="Surname.errors?.['pattern']">Surname cannot contain number</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label style="font-family: 'Raleway', sans-serif;">Username (Email)</label>
+        <input
+          type="email"
+          name="username"
+          placeholder="Email"
+          class="form-control"
+          [(ngModel)]="username"
+          #Email='ngModel'
+          required
+          pattern='^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$'
+          [ngClass]="{'is-invalid': Email.touched && Email.invalid}"
+        >
+
+        <div class="alert alert-danger" *ngIf="Email.touched && Email.invalid">
+          <div *ngIf="Email.errors?.['required']">Username field is required</div>
+          <div *ngIf="Email.errors?.['pattern']">Wrong username format (ex: support@mail.ru)</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label style="font-family: 'Raleway', sans-serif;">Password</label>
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          class="form-control"
+          [(ngModel)]="password"
+          #Password='ngModel'
+          required
+          [ngClass]="{'is-invalid': Password.touched && Password.invalid}"
+        >
+
+        <div class="alert alert-danger" *ngIf="Password.touched && Password.invalid">
+          <div *ngIf="Password.errors?.['required']">Password field is required</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label style="font-family: 'Raleway', sans-serif;">User Type</label>
+        <select class="custom-select" name="type" [(ngModel)]="type">
+          <option value="STUDENT" selected>Student</option>
+          <option value="TEACHER">Teacher</option>
+        </select>
+      </div>
+
+      <div class="form-group mt-4" style="width: 100%;">
+        <button type="submit" class="btn btn-success" style="width: 83px">Register</button>
+      </div>
+    </form>
+  </div>
+
+</div>
